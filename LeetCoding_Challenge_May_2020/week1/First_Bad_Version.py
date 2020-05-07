@@ -15,7 +15,7 @@ class Solution:
         r=n
         lastBad=mid
         while l<=r:
-            mid=int((l+r)/2)
+            mid=(l+r)//2
             if isBadVersion(mid):
                 lastBad=mid
                 r=mid-1
