@@ -1,30 +1,19 @@
 class Solution:
     def getKth(self, lo: int, hi: int, k: int) -> int:
-        even=lambda a : a/2
-        odd=lambda a: 2*a + 1
-        dct=collections.defaultdict(list)
-        dct1=collections.defaultdict(int)
+        dct={1:0}
         
-        for i in range(lo,hi+1):
-            val=i
-            cnt=0
-            while 1==1:
-                if val%2==0:
-                    val=val/2
+        def findSteps(n):
+            if n not in dct:
+                if n%2==0:
+                    dct[n]=findSteps(n/2) + 1
                 else:
-                    val=3*val + 1
-                
-                cnt+=1
-                if val==1:
-                    break
+                    dct[n]=findSteps(3*n + 1) + 1
             
-            dct[cnt].append(i)
-            
+            return dct[n]
         
-        lst=sorted(dct.keys())
-        lst2=[]
-        for i in lst:
-            lst2 = lst2 + sorted(dct[i])
+        arr=[]
+        for i in range(lo,hi+1):
+            arr.append((i,findSteps(i)))
         
-        #print(lst2)
-        return lst2[k-1]
+        arr.sort(key=lambda x: x[1])
+        return arr[k-1][0]
