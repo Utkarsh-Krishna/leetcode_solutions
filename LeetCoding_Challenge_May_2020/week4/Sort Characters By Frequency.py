@@ -11,3 +11,5 @@ class Solution:
         return st
         
         
+#added coorect time completxity.
+#counter will inturn use max heap to get the most common elements
